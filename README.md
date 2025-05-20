@@ -35,8 +35,7 @@
 
 ```bash
 # Clone this repository
-git clone <your-repo-url> crud-frontend
-cd crud-frontend
+git clone <your-repo-url>
 
 # Install dependencies
 npm install
