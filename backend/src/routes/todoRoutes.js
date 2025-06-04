@@ -7,6 +7,8 @@ const router = express.Router();
 // Initialize the router
 const ctrl = require('../controllers/todoController');
 
+// calls
+
 router.get('/', ctrl.getTodos);
 
 

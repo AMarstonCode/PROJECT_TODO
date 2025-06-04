@@ -27,5 +27,5 @@ connectDB()
 const PORT = process.env.PORT || 5000;
 const errorHandler = require("./middleware/errorHandler.js");
 app.use(errorHandler.errorHandler());
-
+app.use("/api/todos", todoRoutes);
 app.listen(PORT, () => console.log(`server is running on port ${PORT}`));
