@@ -3,7 +3,6 @@ const cors = require("cors");
 require("dotenv").config();
 const mongoose = require("mongoose");
 
-// Todo Routes
 
 // to use enviroment variables access the process.env //
 const connectDB = async () => {
