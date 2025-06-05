@@ -5,6 +5,8 @@ const mongoose = require("mongoose");
 
 console.log("MONGO_URI is:", process.env.MONGO_URI);
 
+const todoRoutes = require("../routes/todoRoutes.js");
+
 // to use enviroment variables access the process.env //
 const connectDB = async () => {
   try {
