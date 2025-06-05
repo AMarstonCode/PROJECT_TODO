@@ -1,13 +1,19 @@
-// src/controllers/todoController.js
-// eslint-disable-next-line no-undef
 
-module.exports.getTodos = (req, res) => {
-    const todos = [
-        { id: 1, text: 'Learn Express.js', completed: false },
-        { id: 2, text: 'Build a REST API', completed: true },
-        { id: 3, text: 'Deploy to a server', completed: false }
-    ];
-    res.status(200).json(todos);
+const Todo = require('../models/Todo'); // Adjust the path as needed
+
+const createTodo = async (req, res, next) => {
+  const { title } = req.body;
+
+  try {
+    const newTodo = await Todo.create({ title });
+    res.status(201).json(newTodo);
+  } catch (err) {
+    next(err);
+  }
 };
 
-modules.export getTodos;
+module.exports = {
+  createTodo,
+};
+
+// src/controllers/todoController.js
