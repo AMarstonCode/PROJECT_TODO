@@ -1,0 +1,20 @@
+// src/routes/todoRoutes.js
+
+// import necessary modules
+const express = require('express');
+const router = express.Router();
+
+// Initialize the router
+const ctrl = require('../controllers/todoController');
+
+// calls
+
+router.get('/', ctrl.getTodos);
+
+
+
+
+
+
+module.exports = router;
+
