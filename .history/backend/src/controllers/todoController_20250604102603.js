@@ -9,5 +9,3 @@ module.exports.getTodos = (req, res) => {
     ];
     res.status(200).json(todos);
 };
-
-modules.export getTodos;
