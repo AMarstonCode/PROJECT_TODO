@@ -1,3 +1,4 @@
+
 const Todo = require('../models/Todo'); // Adjust the path as needed
 
 const createTodo = async (req, res, next) => {
@@ -14,3 +15,5 @@ const createTodo = async (req, res, next) => {
 module.exports = {
   createTodo,
 };
+
+// src/controllers/todoController.js
