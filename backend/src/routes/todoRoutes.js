@@ -4,6 +4,7 @@ const { createTodo } = require("../controllers/todoController");
 
 const express = require('express');
 const router = express.Router();
+const { deleteTodo } = require('../controllers/todoController');
 
 // Initialize the router
 const ctrl = require('../controllers/todoController');
@@ -12,6 +13,8 @@ const ctrl = require('../controllers/todoController');
 
 router.get('/', ctrl.getTodos);
 router.post("/", createTodo);
+router.delete('/todos/:id', deleteTodo);
+
 
 
 
