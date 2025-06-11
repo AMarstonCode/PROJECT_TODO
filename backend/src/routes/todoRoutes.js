@@ -1,21 +1,15 @@
-// src/routes/todoRoutes.js
-const { createTodo } = require("../controllers/todoController");
-// import necessary modules
+const { createTodo, deleteTodo } = require("../controllers/todoController");
 
-const express = require('express');
+const express = require("express");
 const router = express.Router();
 
-// Initialize the router
+
 //const ctrl = require('../controllers/todoController');
 
-// calls
+
 
 //router.get('/', ctrl.getTodos);
-router.post("/create", createTodo);
-
-
-
-
+router.post("/", createTodo);
+router.delete("/todos/:id", deleteTodo);
 
 module.exports = router;
-
