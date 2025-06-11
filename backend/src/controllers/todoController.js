@@ -1,14 +1,13 @@
+const Todo = require('../models/Todo');
 
-const Todo = require('../models/Todo'); // Adjust the path as needed
-
-const createTodo = async (req, res, next) => {
+const createTodo = async (req, res) => {
   const { title } = req.body;
 
   try {
-    const newTodo = await Todo.create({ title });
-    res.status(201).json(newTodo);
-  } catch (err) {
-    next(err);
+    const addTodo = await Todo.create({ title });
+    res.status(201).send(addTodo);
+  } catch (error) {
+    console.error("Error creating todo:", error);
   }
 };
 
@@ -31,5 +30,3 @@ exports.deleteTodo = async (req, res, next) => {
 module.exports = {
   createTodo,
 };
-
-// src/controllers/todoController.js
