@@ -26,7 +26,18 @@ const deleteTodo = async (req, res) => {
   }
 };
 
+const getTodos = async (req, res) => {
+  try {
+    const todos = await Todo.find();
+    res.status(200).send(todos);
+  } catch (error) {
+    console.error("Error fetching todos:", error);
+    res.status(500).send({ message: "Internal server error" });
+  }
+}
+
 module.exports = {
   createTodo,
+  getTodos,
   deleteTodo
 };
