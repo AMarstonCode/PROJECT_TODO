@@ -36,7 +36,7 @@ const getTodos = async (req, res) => {
   }
 }
 
-const updateTodos = async (req, res) => {
+const updateTodo = async (req, res) => {
   try {
     const { id } = req.params
     const updates = req.body
@@ -58,5 +58,5 @@ module.exports = {
   createTodo,
   getTodos,
   deleteTodo,
-  updateTodos
+  updateTodo
 };
