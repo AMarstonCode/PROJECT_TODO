@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import Grid from '@mui/material/Grid';
 import Card from '../components/Card';
 import Box from '@mui/material/Box';
@@ -10,6 +10,7 @@ import ListItemText from '@mui/material/ListItemText';
 import Checkbox from '@mui/material/Checkbox';
 import IconButton from '@mui/material/IconButton';
 import DeleteIcon from '@mui/icons-material/Delete';
+import { getTodos, createTodo } from '../utils/api';
 
 export default function Tasks() {
   const [tasks, setTasks] = useState([
@@ -20,15 +21,29 @@ export default function Tasks() {
 
   const addTask = () => {
     if (!newTask) return;
-    setTasks([...tasks, { id: Date.now(), title: newTask, done: false }]);
+    createTodo(newTask).then((data) => {
+      setTasks([...tasks, data])
+    })
     setNewTask('');
   };
+
   const toggle = (id) => {
-    setTasks(tasks.map((t) => (t.id === id ? { ...t, done: !t.done } : t)));
+    setTasks(tasks.map((t) => (t._id === id ? { ...t, completed: !t.completed } : t)));
   };
   const remove = (id) => {
-    setTasks(tasks.filter((t) => t.id !== id));
+    setTasks(tasks.filter((t) => t._id !== id));
   };
+
+  // The useEffect hook is a React hook that allows you to perform side effects in your component.
+  // a useEffect takes two arguments:
+  // 1. a function that will be executed after the component is mounted
+  // 2. an array of dependencies
+  useEffect(() => {
+    getTodos().then((data) => {
+      console.log(data)
+      setTasks(data)
+    })
+  }, [])
 
   return (
     <Grid container spacing={2}>
@@ -52,16 +67,16 @@ export default function Tasks() {
           <List>
             {tasks.map((task) => (
               <ListItem
-                key={task.id}
+                key={task._id}
                 secondaryAction={
-                  <IconButton edge="end" onClick={() => remove(task.id)}>
+                  <IconButton edge="end" onClick={() => remove(task._id)}>
                     <DeleteIcon />
                   </IconButton>
                 }
               >
                 <Checkbox
-                  checked={task.done}
-                  onChange={() => toggle(task.id)}
+                  checked={task.completed}
+                  onChange={() => toggle(task._id)}
                 />
                 <ListItemText
                   primary={task.title}
