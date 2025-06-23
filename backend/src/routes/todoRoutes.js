@@ -7,5 +7,5 @@ router.get("/", getTodos);
 router.post("/create", createTodo);
 router.put("/:id", updateTodo);
 router.delete("/delete/:id", deleteTodo);
-
+router.get("/api/tasks/total")
 module.exports = router;
