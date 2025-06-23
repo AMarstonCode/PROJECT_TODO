@@ -54,9 +54,21 @@ const updateTodo = async (req, res) => {
   }
 }
 
+const getTotalTasks = async (req,res) => {
+
+  try {
+    const count = await Todo.countDocuments();
+    res.status(200).send(count)
+  }catch(err) {
+    console.error(err)
+    res.status(500).send(err)
+  }
+}
+
 module.exports = {
   createTodo,
   getTodos,
   deleteTodo,
-  updateTodo
+  updateTodo,
+  getTotalTasks
 };
