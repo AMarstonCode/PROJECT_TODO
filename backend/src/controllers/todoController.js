@@ -58,7 +58,7 @@ const getTotalTasks = async (req,res) => {
 
   try {
     const count = await Todo.countDocuments();
-    res.status(200).send(count)
+    res.status(200).send({totalTasks:count})
   }catch(err) {
     console.error(err)
     res.status(500).send(err)
