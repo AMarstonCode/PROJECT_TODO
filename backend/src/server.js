@@ -6,6 +6,7 @@ const mongoose = require("mongoose");
 console.log("MONGO_URI is:", process.env.MONGO_URI);
 
 const todoRoutes = require("./routes/todoRoutes.js");
+const userRoutes = require("./routes/userRoutes.js");
 
 // to use enviroment variables access the process.env //
 const connectDB = async () => {
@@ -24,7 +25,7 @@ const app = express();
 
 app.use(cors());
 app.use(express.json());
- 
+
 connectDB()
 const PORT = process.env.PORT || 5000;
 
@@ -34,5 +35,6 @@ const PORT = process.env.PORT || 5000;
 
 
 app.use("/api/todos", todoRoutes);
+app.use("/api/users", userRoutes);
 
 app.listen(PORT, () => console.log(`server is running on port ${PORT}`));
