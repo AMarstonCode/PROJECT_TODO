@@ -34,29 +34,30 @@ const getTodos = async (req, res) => {
     console.error("Error fetching todos:", error);
     res.status(500).send({ message: "Internal server error" });
   }
-}
+};
 
 const updateTodo = async (req, res) => {
   try {
-    const { id } = req.params
-    const updates = req.body
-    const data = await Todo.findByIdAndUpdate(id, updates, { new: true, runValidators: true })
+    const { id } = req.params;
+    const updates = req.body;
+    const data = await Todo.findByIdAndUpdate(id, updates, {
+      new: true,
+      runValidators: true,
+    });
     if (data != null) {
-      res.status(200).send(data)
-
+      res.status(200).send(data);
     } else {
-      res.status(404).send({ message: "Todo not found" })
-
+      res.status(404).send({ message: "Todo not found" });
     }
   } catch (error) {
-    console.error(error)
-    res.status(500).send(error)
+    console.error(error);
+    res.status(500).send(error);
   }
-}
+};
 
 module.exports = {
   createTodo,
   getTodos,
+  updateTodo,
   deleteTodo,
-  updateTodo
 };
