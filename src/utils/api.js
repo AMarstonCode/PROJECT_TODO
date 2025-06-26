@@ -24,5 +24,32 @@ const createTodo = async (title) => {
     }
 }
 
+// User API functions
+const signupUser = async (name, email, password) => {
+    try {
+        const response = await axios.post("http://localhost:5000/api/user/create", {
+            name: name,
+            email: email,
+            password: password
+        });
+        return response.data;
+    } catch (error) {
+        console.error("Error creating user:", error);
+        throw error;
+    }
+}
 
-export { getTodos, createTodo };
+const loginUser = async (email, password) => {
+    try {
+        const response = await axios.post("http://localhost:5000/api/user/login", {
+            email: email,
+            password: password
+        });
+        return response.data;
+    } catch (error) {
+        console.error("Error logging in user:", error);
+        throw error;
+    }
+}
+
+export { getTodos, createTodo, signupUser, loginUser };

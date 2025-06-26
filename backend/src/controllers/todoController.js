@@ -53,11 +53,12 @@ const updateTodo = async (req, res) => {
     console.error(error);
     res.status(500).send(error);
   }
-};
+}
 
 module.exports = {
   createTodo,
   getTodos,
   updateTodo,
   deleteTodo,
+  updateTodo
 };
