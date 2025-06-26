@@ -1,10 +1,10 @@
-const Todo = require("../models/user.js");
+const User = require("../models/user.js");
 
 const createUser = async (req, res) => {
-  const { username, email, password } = req.body;
+  const { name, email, password } = req.body;
 
   try {
-    const addUser = await User.create({ username, email, password });
+    const addUser = await User.create({ name, email, password });
     res.status(201).send(addUser);
   } catch (error) {
     console.error("Error creating user:", error);
@@ -14,7 +14,7 @@ const createUser = async (req, res) => {
 const deleteUser = async (req, res) => {
   try {
     const { id } = req.params;
-    const deletedUser = await Todo.findByIdAndDelete(id);
+    const deletedUser = await User.findByIdAndDelete(id);
 
     if (deletedUser) {
       res.status(200).send({ message: "User deleted" });
@@ -40,7 +40,7 @@ const updateUser = async (req, res) => {
   try {
     const { id } = req.params
     const updates = req.body
-    const data = await Todo.findByIdAndUpdate(id, updates, { new: true, runValidators: true })
+    const data = await User.findByIdAndUpdate(id, updates, { new: true, runValidators: true })
     if (data != null) {
       res.status(200).send(data)
 
