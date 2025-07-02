@@ -15,12 +15,42 @@ const getTodos = async () => {
     }
 }
 
-const createTodo = async (title) => {
+const createTodo = async (title, description = "", tags = []) => {
     try {
-        const response = await axios.post("http://localhost:5000/api/todos/create", {title: title})
+        const response = await axios.post("http://localhost:5000/api/todos/create", {
+            title: title,
+            description: description,
+            tags: tags
+        })
         return response.data;
     } catch (error) {
         console.error("Error creating todo:", error);
+        throw error;
+    }
+}
+
+// Tag API functions
+const getTags = async () => {
+    try {
+        const response = await axios.get("http://localhost:5000/api/tags/");
+        return response.data;
+    } catch (error) {
+        console.error("Error fetching tags:", error);
+        throw error;
+    }
+}
+
+const createTag = async (name, color = "#2196f3", description = "") => {
+    try {
+        const response = await axios.post("http://localhost:5000/api/tags/create", {
+            name: name,
+            color: color,
+            description: description
+        });
+        return response.data;
+    } catch (error) {
+        console.error("Error creating tag:", error);
+        throw error;
     }
 }
 
@@ -52,4 +82,4 @@ const loginUser = async (email, password) => {
     }
 }
 
-export { getTodos, createTodo, signupUser, loginUser };
+export { getTodos, createTodo, getTags, createTag, signupUser, loginUser };

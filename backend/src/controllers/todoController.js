@@ -1,13 +1,19 @@
 const Todo = require("../models/Todo");
 
 const createTodo = async (req, res) => {
-  const { title } = req.body;
+  const { title, description, tags } = req.body;
 
   try {
-    const addTodo = await Todo.create({ title });
+    // Validate that at least one tag is provided
+    if (!tags || tags.length === 0) {
+      return res.status(400).send({ message: "At least one tag is required" });
+    }
+
+    const addTodo = await Todo.create({ title, description, tags });
     res.status(201).send(addTodo);
   } catch (error) {
     console.error("Error creating todo:", error);
+    res.status(500).send({ message: "Internal server error" });
   }
 };
 
@@ -28,7 +34,7 @@ const deleteTodo = async (req, res) => {
 
 const getTodos = async (req, res) => {
   try {
-    const todos = await Todo.find();
+    const todos = await Todo.find().populate('tags');
     res.status(200).send(todos);
   } catch (error) {
     console.error("Error fetching todos:", error);
@@ -40,17 +46,21 @@ const updateTodo = async (req, res) => {
   try {
     const { id } = req.params
     const updates = req.body
-    const data = await Todo.findByIdAndUpdate(id, updates, { new: true, runValidators: true })
+    
+    // Validate that at least one tag is provided if tags are being updated
+    if (updates.tags && updates.tags.length === 0) {
+      return res.status(400).send({ message: "At least one tag is required" });
+    }
+    
+    const data = await Todo.findByIdAndUpdate(id, updates, { new: true, runValidators: true }).populate('tags')
     if (data != null) {
       res.status(200).send(data)
-
     } else {
       res.status(404).send({ message: "Todo not found" })
-
     }
   } catch (error) {
     console.error(error)
-    res.status(500).send(error)
+    res.status(500).send({ message: "Internal server error" })
   }
 }
 

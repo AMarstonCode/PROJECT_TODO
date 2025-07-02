@@ -7,6 +7,7 @@ console.log("MONGO_URI is:", process.env.MONGO_URI);
 
 const todoRoutes = require("./routes/todoRoutes.js");
 const userRoutes = require("./routes/userRoutes.js");
+const tagRoutes = require("./routes/tagRoutes.js");
 
 // to use enviroment variables access the process.env //
 const connectDB = async () => {
@@ -36,5 +37,6 @@ const PORT = process.env.PORT || 5000;
 
 app.use("/api/todos", todoRoutes);
 app.use("/api/user", userRoutes);
+app.use("/api/tags", tagRoutes);
 
 app.listen(PORT, () => console.log(`server is running on port ${PORT}`));
